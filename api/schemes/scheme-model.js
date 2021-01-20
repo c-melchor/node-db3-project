@@ -21,5 +21,15 @@ module.exports = {
           .where("id", scheme_id)
           .first();
       });
+  },
+  update(changes, id) {
+    return db("schemes")
+      .where("id", id)
+      .update(changes)
+      .then(scheme_id => {
+        return db("schemes")
+          .where("id", scheme_id)
+          .first();
+      });
   }
 };
