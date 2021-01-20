@@ -31,5 +31,15 @@ module.exports = {
           .where("id", scheme_id)
           .first();
       });
+  },
+  remove(id) {
+    return db("schemes")
+      .where("id", id)
+      .del()
+      .then(scheme_id => {
+        return db("schemes")
+          .where("id", scheme_id)
+          .first();
+      });
   }
 };
