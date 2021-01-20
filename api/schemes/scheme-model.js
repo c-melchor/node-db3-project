@@ -10,9 +10,13 @@ module.exports = {
       .where("id", id)
       .first();
   },
-  //   findSteps(id) {
-  //     return db("schemes").join("steps", "id", "scheme_id");
-  //   },
+  findSteps(id) {
+    return db("schemes as s")
+      .join("steps as t", "s.id", "t.scheme_id")
+      .select("s.id", "s.scheme_name", "t.step_number", "t.instructions")
+      .orderBy("t.step_number")
+      .where("s.id", id);
+  },
   add(scheme) {
     return db("schemes")
       .insert(scheme)
