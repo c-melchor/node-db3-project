@@ -1,8 +1,7 @@
 const express = require("express");
-
 const Schemes = require("./scheme-model.js");
-
 const router = express.Router();
+const checkForValidId = require("../middleware/middleware");
 
 router.get("/", (req, res) => {
   Schemes.find()
@@ -14,7 +13,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", checkForValidId, (req, res) => {
   const { id } = req.params;
 
   Schemes.findById(id)
@@ -107,7 +106,7 @@ router.put("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", checkForValidId, (req, res) => {
   const { id } = req.params;
 
   Schemes.remove(id)
